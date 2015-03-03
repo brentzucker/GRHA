@@ -1,24 +1,32 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.1.12
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 01, 2015 at 11:04 PM
--- Server version: 5.6.21
--- PHP Version: 5.6.3
+-- Host: localhost:8889
+-- Generation Time: Mar 03, 2015 at 11:30 PM
+-- Server version: 5.5.34
+-- PHP Version: 5.5.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+--
+-- Database: `GRHA`
+--
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+-- --------------------------------------------------------
 
 --
--- Database: `grha`
+-- Table structure for table `Conferences`
 --
+
+CREATE TABLE `Conferences` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(30) DEFAULT NULL,
+  `Date` datetime DEFAULT NULL,
+  `Location` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -26,21 +34,25 @@ SET time_zone = "+00:00";
 -- Table structure for table `membership`
 --
 
-CREATE TABLE IF NOT EXISTS `membership` (
+CREATE TABLE `membership` (
   `Type` varchar(20) NOT NULL DEFAULT '',
   `Price` int(11) NOT NULL,
-  `Category` varchar(25) NOT NULL
+  `Category` varchar(25) NOT NULL,
+  PRIMARY KEY (`Type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `membership`
+-- Table structure for table `newsletter`
 --
 
-INSERT INTO `membership` (`Type`, `Price`, `Category`) VALUES
-('Corporate Platinum', 150, 'Corporate'),
-('None', 0, 'None'),
-('Organization', 100, 'Organization'),
-('Student', 50, 'Individual');
+CREATE TABLE `newsletter` (
+  `firstname` varchar(20) DEFAULT NULL,
+  `lastname` varchar(20) DEFAULT NULL,
+  `email` varchar(40) NOT NULL DEFAULT '',
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -48,10 +60,24 @@ INSERT INTO `membership` (`Type`, `Price`, `Category`) VALUES
 -- Table structure for table `organizations`
 --
 
-CREATE TABLE IF NOT EXISTS `organizations` (
+CREATE TABLE `organizations` (
   `OrganizationName` varchar(30) NOT NULL DEFAULT '',
-  `DESCRIPTION` varchar(150) DEFAULT NULL
+  `DESCRIPTION` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`OrganizationName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Transactions`
+--
+
+CREATE TABLE `Transactions` (
+  `itemID` int(11) NOT NULL AUTO_INCREMENT,
+  `datePurchased` datetime DEFAULT NULL,
+  `username` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`itemID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -59,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `organizations` (
 -- Table structure for table `usercontact`
 --
 
-CREATE TABLE IF NOT EXISTS `usercontact` (
+CREATE TABLE `usercontact` (
   `Username` varchar(20) NOT NULL DEFAULT '',
   `Firstname` varchar(20) DEFAULT NULL,
   `Lastname` varchar(20) DEFAULT NULL,
@@ -70,7 +96,8 @@ CREATE TABLE IF NOT EXISTS `usercontact` (
   `State` char(2) DEFAULT NULL,
   `Employer` varchar(20) DEFAULT NULL,
   `Position` varchar(20) DEFAULT NULL,
-  `Fax` varchar(15) DEFAULT NULL
+  `Fax` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -79,9 +106,10 @@ CREATE TABLE IF NOT EXISTS `usercontact` (
 -- Table structure for table `usercredentials`
 --
 
-CREATE TABLE IF NOT EXISTS `usercredentials` (
+CREATE TABLE `usercredentials` (
   `Username` varchar(20) NOT NULL DEFAULT '',
-  `Password` varchar(25) DEFAULT NULL
+  `Password` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -90,46 +118,15 @@ CREATE TABLE IF NOT EXISTS `usercredentials` (
 -- Table structure for table `userdata`
 --
 
-CREATE TABLE IF NOT EXISTS `userdata` (
+CREATE TABLE `userdata` (
   `Organization` varchar(30) DEFAULT NULL,
   `Username` varchar(20) NOT NULL DEFAULT '',
   `Membership` varchar(20) DEFAULT NULL,
-  `MemberSince` date DEFAULT NULL
+  `MemberSince` date DEFAULT NULL,
+  PRIMARY KEY (`Username`),
+  KEY `Organization` (`Organization`),
+  KEY `Membership` (`Membership`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `membership`
---
-ALTER TABLE `membership`
- ADD PRIMARY KEY (`Type`);
-
---
--- Indexes for table `organizations`
---
-ALTER TABLE `organizations`
- ADD PRIMARY KEY (`OrganizationName`);
-
---
--- Indexes for table `usercontact`
---
-ALTER TABLE `usercontact`
- ADD PRIMARY KEY (`Username`);
-
---
--- Indexes for table `usercredentials`
---
-ALTER TABLE `usercredentials`
- ADD PRIMARY KEY (`Username`);
-
---
--- Indexes for table `userdata`
---
-ALTER TABLE `userdata`
- ADD PRIMARY KEY (`Username`), ADD KEY `Organization` (`Organization`), ADD KEY `Membership` (`Membership`);
 
 --
 -- Constraints for dumped tables
@@ -139,16 +136,12 @@ ALTER TABLE `userdata`
 -- Constraints for table `usercontact`
 --
 ALTER TABLE `usercontact`
-ADD CONSTRAINT `usercontact_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `usercredentials` (`Username`);
+  ADD CONSTRAINT `usercontact_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `usercredentials` (`Username`);
 
 --
 -- Constraints for table `userdata`
 --
 ALTER TABLE `userdata`
-ADD CONSTRAINT `userdata_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `usercredentials` (`Username`),
-ADD CONSTRAINT `userdata_ibfk_2` FOREIGN KEY (`Organization`) REFERENCES `organizations` (`OrganizationName`),
-ADD CONSTRAINT `userdata_ibfk_3` FOREIGN KEY (`Membership`) REFERENCES `membership` (`Type`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  ADD CONSTRAINT `userdata_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `usercredentials` (`Username`),
+  ADD CONSTRAINT `userdata_ibfk_2` FOREIGN KEY (`Organization`) REFERENCES `organizations` (`OrganizationName`),
+  ADD CONSTRAINT `userdata_ibfk_3` FOREIGN KEY (`Membership`) REFERENCES `membership` (`Type`);
