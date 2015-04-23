@@ -21,7 +21,7 @@ echo<<<_END
 	  <nav>
 	    <div id="menubar">
           <ul id="nav">
-            <li class="current"><a href="index.php">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="conferences.php">Conferences</a></li>
             <li><a href="cart.php">Cart</a></li>

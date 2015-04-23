@@ -346,3 +346,27 @@ footer a:hover
   border-radius: 7px 7px 7px 7px;
   -moz-border-radius: 7px 7px 7px 7px;
   -webkit-border: 7px 7px 7px 7px;}
+  
+.login {
+	float: left;
+	width: 48%;
+	text-align: center;
+}
+
+fieldset {
+	padding: 10px 10px 10px 10px;
+}
+
+.create {
+	float: right;
+	width: 48%;
+	text-align: center;
+}
+
+form {
+	padding: 20px 0 20px 0;
+}
+
+.login-info {
+	margin-top: 10px;
+}

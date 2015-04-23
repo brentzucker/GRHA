@@ -13,13 +13,33 @@ echo<<<_END
         </ul> 
 	  </div>	
 	</div> 
-	
-	
-	
-	
-	<div id="site_content">		
 
-	</div>  	
+	<div id="site_content">	
+	
+	<div class="login-info">
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nibh ligula, iaculis accumsan accumsan eget, ullamcorper eget justo. Pellentesque magna eros, pulvinar eget tortor id, dignissim ornare risus. Nulla sit amet aliquam quam. Quisque tempor felis at justo laoreet facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In id nisl diam. In eros ex, egestas id iaculis eget, consequat in velit.</p>
+		<br>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nibh ligula, iaculis accumsan accumsan eget, ullamcorper eget justo. Pellentesque magna eros, pulvinar eget tortor id, dignissim ornare risus. Nulla sit amet aliquam quam. Quisque tempor felis at justo laoreet facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In id nisl diam. In eros ex, egestas id iaculis eget, consequat in velit.</p>
+	</div>
+	
+		<form action="" method="POST" class="login">
+			<fieldset >
+			<legend>Login</legend>
+			Username: <input type="text" name="userName" placeholder="Username..."><br><br>
+			Password: <input type="text" name="password" placeholder="Password..."><br><br>
+			<input type="submit" value="Login">
+			</fieldset>
+		</form>
+		
+		<form action="" method="POST" class="create">
+			<fieldset >
+			<legend>Create Account</legend>
+			Username: <input type="text" name="create_userName" placeholder="Username..."><br><br>
+			Password: <input type="text" name="create_password" placeholder="Password..."><br><br>
+			<input type="submit" value="Create Account">
+			</fieldset>
+		</form>
+</div>  	
 _END;
 
 close_html();
