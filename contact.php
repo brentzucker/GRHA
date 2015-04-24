@@ -1,6 +1,9 @@
 <?php
 
 require_once 'page_functions.php';
+require_once 'dbconnection.php';
+
+session_start();
 
 open_html("Contact");
 
@@ -24,7 +27,7 @@ echo<<<_END
 						Email: <input type="text"><br><br><br>
 						Phone: <input type="text"><br><br><br>
 						Comments:<br>
-						<textarea rows="6" cols="50"></textarea><br><br><br>
+						<textarea rows="6" cols="30"></textarea><br><br><br>
 						<input type="submit" value="Submit">
 					</form>
 				</div>

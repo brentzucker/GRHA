@@ -1,6 +1,9 @@
 <?php
 
 require_once 'page_functions.php';
+require_once 'dbconnection.php';
+
+session_start();
 
 open_html("Home");
 
@@ -34,8 +37,11 @@ echo<<<_END
 		<form action="" method="POST" class="create">
 			<fieldset >
 			<legend>Create Account</legend>
+			First Name: <input type="text" name="create_fname" placeholder="First Name..."><br><br>
+			Last Name: <input type="text" name="create_lname" placeholder="Last Name..."><br><br>
 			Username: <input type="text" name="create_userName" placeholder="Username..."><br><br>
 			Password: <input type="text" name="create_password" placeholder="Password..."><br><br>
+			<input type="number" name="custID" hidden>
 			<input type="submit" value="Create Account">
 			</fieldset>
 		</form>
@@ -43,5 +49,45 @@ echo<<<_END
 _END;
 
 close_html();
+
+checkLogin();
+createAccount();
+
+function checkLogin()
+{	
+	if(isset($_POST['userName']) && isset($_POST['password']))
+	{
+		$un = $_POST['userName'];
+		$pw = $_POST['password'];
+	
+	
+		$sql="SELECT * FROM customers WHERE userName='$un' and password='$pw'";
+		$result=mysql_query($sql);
+		$count=mysql_num_rows($result);
+		
+		if($count==1)
+		{
+			$_SESSION['Developer'];
+			header("Location:index.php");
+		}
+	}
+}
+
+function createAccount()
+{
+	if(isset($_POST['create_userName']) && isset($_POST['create_password']))
+	{
+		$un = $_POST['create_userName'];
+		$pw = $_POST['create_password'];
+		$cust = $_POST['custID'];
+		$fn = $_POST['create_fname'];
+		$ln = $_POST['create_lname'];
+		
+		$query = "INSERT INTO customers (firstName, lastName, userName, password, customerID) VALUES ('$fn', '$ln','$un', '$pw', '$cust')";
+		mysql_query($query);
+	}
+}
+
+
 
 ?>

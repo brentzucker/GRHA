@@ -1,6 +1,9 @@
 <?php
 
 require_once 'page_functions.php';
+require_once 'dbconnection.php';
+
+session_start();
 
 open_html("Conferences");
 

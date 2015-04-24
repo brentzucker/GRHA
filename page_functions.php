@@ -1,5 +1,7 @@
 <?php
 
+require_once 'dbconnection.php';
+
 function open_html($title)
 {
 echo<<<_END
@@ -38,7 +40,7 @@ function close_html()
 {
 echo<<<_END
 	<footer>
-		<p>Copyright &copy; 2015 Georgia Rural Health Association</p>
+		<p>Copyright &copy; 2015 Georgia Rural Health Association | logged in as: </p><a href="logout.php">Log Out</a>
     </footer>
 	
   </div>
