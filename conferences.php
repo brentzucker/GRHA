@@ -20,6 +20,11 @@ echo<<<_END
   	
     
 	<div id="site_content">
+_END;
+
+		getConferences();
+		
+echo<<<_END
 
 	</div>
 _END;

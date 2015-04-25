@@ -370,3 +370,12 @@ form {
 .login-info {
 	margin-top: 10px;
 }
+
+.menu {
+	width: 220px;
+}
+
+.conference-table {
+	margin: 0 auto;
+	text-align: center;
+}
