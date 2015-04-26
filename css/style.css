@@ -379,3 +379,8 @@ form {
 	margin: 0 auto;
 	text-align: center;
 }
+
+.cart-table table, td, th {
+	padding: 10px;
+	border: 2px solid black;
+}
