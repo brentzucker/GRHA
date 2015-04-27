@@ -103,7 +103,7 @@ function showCart()
 		$_SESSION['cart']=array();
 		$_SESSION['totalP']=0;
 		session_destroy();
-		echo "now empty";
+		echo "<h2 class='empty-cart'>Your Cart Is Empty. Add Conferences.</h2>";
 	}
 	else {
 		print_order();
@@ -148,7 +148,7 @@ _END;
 	}
 	else
 	{
-		echo "Empty cart.";
+		echo "<h2 class='empty-cart'>Your Cart Is Empty. Add Conferences.</h2>";
 	}
 }
 
@@ -175,7 +175,7 @@ function addToCart()
 	else
 		$_SESSION['cart'][$conferenceID]['quantity']+=$quantity;
 
-	echo "Conferences added to cart, view items in the \"cart\" tab";
+	echo "<h2 class='empty-cart'>Conferences added to cart, view items in the \"cart\" tab</h2>";
 }
 
 function getConferences()

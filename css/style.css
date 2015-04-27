@@ -372,7 +372,7 @@ form {
 }
 
 .menu {
-	width: 220px;
+	width: 20%;
 }
 
 .conference-table {
@@ -383,4 +383,10 @@ form {
 .cart-table table, td, th {
 	padding: 10px;
 	border: 2px solid black;
+}
+
+.empty-cart {
+	text-align: center;
+	margin-top: 100px;
+	margin-bottom: 100px;
 }
