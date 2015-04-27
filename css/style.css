@@ -390,3 +390,42 @@ form {
 	margin-top: 100px;
 	margin-bottom: 100px;
 }
+
+.force-login {
+	text-align: center;
+	color: red;
+}
+
+#message {
+	color: red;
+}
+
+#message2 {
+	color: red;
+}
+
+.center {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.menu_title {
+	width: 200px;
+}
+
+.location{
+	width: 200px;
+}
+
+.menu_price{
+	width: 200px;
+}
+
+.menu_quantity{
+	width: 200px;
+}
+
+.order-form {
+	margin: 0 auto;
+	text-align: center;
+}

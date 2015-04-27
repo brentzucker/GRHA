@@ -8,11 +8,12 @@ session_start();
 open_html("Home");
 
 echo<<<_END
+
     <div id="slideshow_container">
 	  <div class="slideshow">
 	    <ul class="slideshow">
           <li class="show"><img width="940" height="250" src="images/main.png" alt="&quot;Georgia Rural Health Association&quot;" /></li>
-          <li><img width="940" height="250" src="http://placehold.it/940x250" alt="&quot;Enter your caption here&quot;" /></li>
+          <li><img width="940" height="250" src="images/atl.jpg" alt="&quot;Atlanta&quot;" /></li>
         </ul>
 	  </div>
 	</div>
@@ -25,6 +26,10 @@ echo<<<_END
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nibh ligula, iaculis accumsan accumsan eget, ullamcorper eget justo. Pellentesque magna eros, pulvinar eget tortor id, dignissim ornare risus. Nulla sit amet aliquam quam. Quisque tempor felis at justo laoreet facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In id nisl diam. In eros ex, egestas id iaculis eget, consequat in velit.</p>
 	</div>
 	
+	<br />
+	
+	<h2 class="force-login">You must login or create an account to continue</h2>
+	
 		<form action="" method="POST" class="login">
 			<fieldset >
 			<legend>Login</legend>
@@ -34,25 +39,25 @@ echo<<<_END
 			</fieldset>
 		</form>
 		
-		<form action="" method="POST" class="create">
+		<form action="" method="POST" class="create" onSubmit="return allValid(this)" >
 			<fieldset >
 			<legend>Create Account</legend>
 			First Name: <input type="text" name="create_fname" placeholder="First Name..."><br><br>
 			Last Name: <input type="text" name="create_lname" placeholder="Last Name..."><br><br>
 			Address: <input type="text" name="create_address" placeholder="Address..."><br><br>
-			Username: <input type="text" name="create_userName" placeholder="Username..."><br><br>
-			Password: <input type="text" name="create_password" placeholder="Password..."><br><br>
+			Username: <input type="email" name="create_userName" placeholder="Username..."><br><br>
+			Password: <input type="password" id="pwd" name="create_password" placeholder="Password..."><br><br>
 			<input type="number" name="custID" hidden>
 			<input type="submit" value="Create Account">
 			</fieldset>
 		</form>
-</div>  	
+</div> 
+	
 _END;
 
 close_html();
 
 checkLogin();
-createAccount();
 
 
 

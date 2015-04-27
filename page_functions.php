@@ -4,6 +4,7 @@ require_once 'dbconnection.php';
 
 function open_html($title)
 {
+
 echo<<<_END
 <!DOCTYPE html> 
 <html>
@@ -39,9 +40,9 @@ _END;
 function close_html()
 {
 	$user;
-	if(isset($_SESSION['Developer']))
+	if(isset($_SESSION['User']))
 	{
-		$user = $_SESSION['Developer'];
+		$user = $_SESSION['User'];
 	}
 	else
 		$user = "";
@@ -74,7 +75,7 @@ function checkLogin()
 		
 		if($count==1)
 		{
-			$_SESSION['Developer'] = $un;
+			$_SESSION['User'] = $un;
 			header("Location:index.php");
 		}
 	}
@@ -82,7 +83,7 @@ function checkLogin()
 
 function createAccount()
 {
-	if(isset($_POST['create_userName']) && isset($_POST['create_password']))
+	if(isset($_POST['create_userName']) && isset($_POST['create_password']) )
 	{
 		$un = $_POST['create_userName'];
 		$pw = $_POST['create_password'];
@@ -107,6 +108,24 @@ function showCart()
 	}
 	else {
 		print_order();
+	}
+	
+	if(isset($_POST['checkOut']))
+	{
+echo<<<_END
+			<form action="" method="POST" class="order-form">
+				First Name: <input type="text" name="fName"><br><br>
+				Last Name: <input type="text" name="lName"><br><br>
+				CC Number: <input type="text" name="cc"><br><br>
+				<input type="submit" name="order" value="Finalize Order">
+			</form>
+_END;
+
+		if(isset($_POST['order']))
+		{
+			
+		}
+		
 	}
 }
 function print_order()
@@ -142,6 +161,7 @@ _END;
 		<form name="order" method="post" action="cart.php?clear=1">
 	  		<p>
     			<input name="clear" type="submit" value="Clear Cart" />
+				<input name="checkOut" type="submit" value="Check Out" />
   			</p>
 		</form>
 _END;
@@ -181,7 +201,7 @@ function addToCart()
 function getConferences()
 {
 
-$query = "SELECT conferenceID, name, price, location FROM  conferences";
+$query = "SELECT conferenceID, name, price, location, image FROM  conferences";
 
 $result = mysql_query($query);
 if (!$result) die("failed".mysql_error());
@@ -198,9 +218,10 @@ echo "<td>";
 echo<<<_END
 		<form class="menu" name="menu" method="post" action="cart1.php">
 		<p class="menu_title">$row[1]</p>
-		<p class="menu_pic"><img src="http://placehold.it/200x200" alt="$row[1]" /></p>
-		<p class="menu_price">price: $row[2]</p>
-		<p class="menu_quantity">quantity: 
+		<p class="menu_pic"><img src="images/$row[4]" alt="$row[1]" /></p>
+		<p class="location">Location: $row[3]</p>
+		<p class="menu_price">Price: $row[2]</p>
+		<p class="menu_quantity">Quantity: 
 		<input name="quantity" type="number" id="textfield" value="1" size="1" />
 		</p>
 		<p class="menu_button">
@@ -228,6 +249,18 @@ if(($rows-1)%4!=3)
 	echo "</div>";
 }
 
+}
+
+function isLogin()
+{
+	if(isset($_SESSION['User']))
+	{
+		
+	}
+	else
+	{
+		header("Location:login.php");
+	}
 }
 
 ?>
