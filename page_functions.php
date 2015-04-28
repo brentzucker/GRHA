@@ -83,7 +83,7 @@ function checkLogin()
 
 function createAccount()
 {
-	if(isset($_POST['create_userName']) && isset($_POST['create_password']) )
+	if(isset($_POST['submit']))
 	{
 		$un = $_POST['create_userName'];
 		$pw = $_POST['create_password'];
@@ -92,7 +92,7 @@ function createAccount()
 		$ln = $_POST['create_lname'];
 		$ad = $_POST['create_address'];
 		
-		$query = "INSERT INTO customers (firstName, lastName, userName, password, customerID, address) VALUES ('$fn', '$ln','$un', '$pw', '$cust', '$ad')";
+		$query = "INSERT INTO customers (customerID, firstName, lastName, address, userName, password) VALUES ('$cust', '$fn', '$ln', '$ad', '$un', '$pw')";
 		mysql_query($query);
 	}
 }
@@ -112,22 +112,47 @@ function showCart()
 	
 	if(isset($_POST['checkOut']))
 	{
+	
+	$date = date("Y-m-d");
+	
+	$price = $_SESSION['totalPrice'];
+	
 echo<<<_END
 			<form action="" method="POST" class="order-form">
 				First Name: <input type="text" name="fName"><br><br>
 				Last Name: <input type="text" name="lName"><br><br>
 				CC Number: <input type="text" name="cc"><br><br>
+				<input type="text" name="custID" hidden>
+				<input type="text" name="quantity" hidden>
+				<input type="date" name="date" value="$date" hidden>
+				<input type="text" name="price" value="$price" hidden>
 				<input type="submit" name="order" value="Finalize Order">
 			</form>
 _END;
-
-		if(isset($_POST['order']))
-		{
-			
-		}
-		
 	}
+	
+	checkout();
+	
 }
+
+function checkout()
+{
+if(isset($_POST['fName']))
+		{
+			$date = date("Y-m-d");
+			$price = $_SESSION['totalPrice'];
+			$fname = $_POST['fName'];
+			$lname = $_POST['lName'];
+		
+			$sql = "INSERT INTO orders (date, firstName, lastName, price) VALUES ('$date', '$fname', '$lname', '$price')";
+			mysql_query($sql);
+			
+			echo '<h2 class="center">Your Order Has Been Complete!</h2>';
+
+		}
+
+}
+
 function print_order()
 {
 	if (isset($_SESSION['cart']))
@@ -139,7 +164,7 @@ function print_order()
 			<th>Conference Name</th>
 			<th>Price</th>
 			<th>Quantity</th>
-			<th>Row Total</th>
+			<th>Total</th>
   		</tr>
 _END;
 		foreach ($_SESSION['cart'] as $conference => $values)
@@ -195,7 +220,8 @@ function addToCart()
 	else
 		$_SESSION['cart'][$conferenceID]['quantity']+=$quantity;
 
-	echo "<h2 class='empty-cart'>Conferences added to cart, view items in the \"cart\" tab</h2>";
+	//echo "<h2 class='empty-cart'>Conferences added to cart, view items in the \"cart\" tab</h2>";
+	header("Location:cart.php");
 }
 
 function getConferences()
@@ -218,7 +244,7 @@ echo "<td>";
 echo<<<_END
 		<form class="menu" name="menu" method="post" action="cart1.php">
 		<p class="menu_title">$row[1]</p>
-		<p class="menu_pic"><img src="images/$row[4]" alt="$row[1]" /></p>
+		<p class="menu_pic"><img src="images/$row[4]" height:200px width: 200px alt="$row[1]" /></p>
 		<p class="location">Location: $row[3]</p>
 		<p class="menu_price">Price: $row[2]</p>
 		<p class="menu_quantity">Quantity: 
