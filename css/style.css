@@ -429,3 +429,13 @@ form {
 	margin: 0 auto;
 	text-align: center;
 }
+
+.photo {
+	margin: 0 auto;
+	text-align: center;
+	display: block;
+}
+
+.red {
+	color: red;
+}

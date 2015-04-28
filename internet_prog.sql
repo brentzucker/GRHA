@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2015 at 04:20 AM
+-- Generation Time: Apr 26, 2015 at 07:58 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -31,20 +31,19 @@ CREATE TABLE IF NOT EXISTS `conferences` (
   `name` varchar(256) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   `location` varchar(256) DEFAULT NULL,
-  `price` varchar(20) DEFAULT NULL,
-  `image` varchar(128) NOT NULL
+  `price` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `conferences`
 --
 
-INSERT INTO `conferences` (`conferenceID`, `name`, `date`, `location`, `price`, `image`) VALUES
-(1, 'Conference 1', '2015-04-30 00:00:00', 'Atlanta', '100', 'atlanta.jpg'),
-(2, 'Conference 2', '2015-04-26 00:00:00', 'Milledgeville', '200', 'milly.jpg'),
-(3, 'Conference 3', '2015-05-20 00:00:00', 'Conyers', '400', 'conyers.jpg'),
-(4, 'Conference 4', '2015-05-28 00:00:00', 'Tifton', '75', 'tifton.jpg'),
-(5, 'Conference 5', '2015-04-20 00:00:00', 'Cordele', '50', 'cordele.jpg');
+INSERT INTO `conferences` (`conferenceID`, `name`, `date`, `location`, `price`) VALUES
+(1, 'Conference 1', '2015-04-30 00:00:00', 'Milledgeville', '100'),
+(2, 'Conference 2', '2015-04-26 00:00:00', 'Atlanta', '200'),
+(3, 'Conference 3', '2015-05-20 00:00:00', 'Conyers', '400'),
+(4, 'Conference 4', '2015-05-28 00:00:00', 'Atlanta', '75'),
+(5, 'Conference 5', '2015-04-20 00:00:00', 'Milledegeville', '50');
 
 -- --------------------------------------------------------
 
@@ -59,15 +58,14 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `address` varchar(128) DEFAULT NULL,
   `userName` varchar(56) DEFAULT NULL,
   `password` varchar(256) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`customerID`, `firstName`, `lastName`, `address`, `userName`, `password`) VALUES
-(1, 'Max', 'Graessle', '3644 Stonehenge Way', 'max', 'max'),
-(8, 'Ryan', 'Graessle', '3644 Stonehenge Way', 'max.graessle@gmail.com', 'password');
+(1, 'Max', 'Graessle', '3644 Stonehenge Way', 'max', 'max');
 
 -- --------------------------------------------------------
 
@@ -76,23 +74,12 @@ INSERT INTO `customers` (`customerID`, `firstName`, `lastName`, `address`, `user
 --
 
 CREATE TABLE IF NOT EXISTS `orders` (
+  `conferenceID` smallint(5) DEFAULT NULL,
+  `customerID` smallint(5) DEFAULT NULL,
+  `quantity` smallint(5) DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `firstName` varchar(56) NOT NULL,
-  `lastName` varchar(56) NOT NULL,
-  `price` int(50) NOT NULL,
-`orderID` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`date`, `firstName`, `lastName`, `price`, `orderID`) VALUES
-('2015-04-28', 'one', 'one', 75, 1),
-('2015-04-22', 'o', 'o', 90, 2),
-('2015-04-28', 'max', 'max', 400, 3),
-('2015-04-28', 'q', 'q', 400, 5),
-('2015-04-28', 'q', 'q', 400, 6);
+  `orderID` smallint(5) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -129,12 +116,7 @@ MODIFY `conferenceID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-MODIFY `customerID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-MODIFY `orderID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `customerID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
