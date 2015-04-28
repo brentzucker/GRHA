@@ -76,46 +76,57 @@ if(isset($_POST['submit']))
 	if(!empty($_POST['create_fname']))
 	{
 		echo '<label class="red"></label>';
+		$fname = true;
 	}
 	else
 	{
 		echo '<label class="red">Please Enter First Name</label><br>';
+		$fname = false;
 	}
 	
 	if(!empty($_POST['create_lname']))
 	{
 		echo '<label class="red"></label>';
+		$lname = true;
 	}
 	else
 	{
 		echo '<label class="red">Please Enter Last Name</label><br>';
+		$lname = false;
 	}
 	
 	if(!empty($_POST['create_address']))
 	{
 		echo '<label class="red"></label>';
+		$add = true;
 	}
 	else
 	{
 		echo '<label class="red">Please Enter Address</label><br>';
+		$add = false;
+		
 	}
 	
 	if(strlen($_POST['create_userName']) < 5)
 	{
 		echo '<label class="red">Username must be 5 characters and an Email Address</label><br>';
+		$un = false;
 	}
 	else
 	{
 		echo '<label class="red"></label>';
+		$un = true;
 	}
 	
 	if(strlen($_POST['create_password']) < 6)
 	{
 		echo '<label class="red">Password must be 6 characters</label><br>';
+		$pass = false;
 	}
 	else
 	{
 		echo '<label class="red"></label>';
+		$pass = true;
 	}
 }
 
@@ -127,9 +138,12 @@ echo<<<_END
 _END;
 
 close_html();
-createAccount();
+
+if($pass==true && $un==true && $add==true && $fname==true && lname==true)
+{
+	createAccount();
+}
+
 checkLogin();
-
-
 
 ?>
